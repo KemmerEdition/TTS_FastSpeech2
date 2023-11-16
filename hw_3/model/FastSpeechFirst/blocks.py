@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
-from hw_fs.model.FastSpeechFirst.utils import MultiHeadAttention, Transpose, create_alignment
+from hw_3.model.FastSpeechFirst.utils import MultiHeadAttention, Transpose, create_alignment
 import numpy as np
 # pay attention for using PRENormalization here (maybe I'll try both options in experiments)
 

@@ -2,7 +2,7 @@ import torch
 from torch import nn
 import numpy as np
 import torch.nn.functional as F
-from hw_fs.model.FastSpeechSecond.utils import Transpose, create_alignment
+from hw_3.model.FastSpeechSecond.utils import Transpose, create_alignment
 
 
 class VariancePredictor(nn.Module):

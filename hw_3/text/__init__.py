@@ -1,6 +1,6 @@
 import re
-from hw_fs.text import cleaners
-from hw_fs.text.symbols import symbols
+from hw_3.text import cleaners
+from hw_3.text.symbols import symbols
 
 # Mappings from symbol to numeric ID and vice versa:
 _symbol_to_id = {s: i for i, s in enumerate(symbols)}

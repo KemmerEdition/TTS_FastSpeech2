@@ -1,1 +1,1 @@
-from hw_fs.collate_fn.collate import Collate
+from hw_3.collate_fn.collate import Collate

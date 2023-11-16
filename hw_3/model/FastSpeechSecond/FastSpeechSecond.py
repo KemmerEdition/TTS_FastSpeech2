@@ -1,9 +1,9 @@
 import torch
 from torch import nn
-from hw_fs.utils.configs import fast_speech_second_config
-from hw_fs.model.FastSpeechSecond.EncoderDecoder import Encoder, Decoder
-from hw_fs.model.FastSpeechSecond.VarianceAdaptor import VarianceAdaptor
-from hw_fs.model.FastSpeechSecond.utils import get_mask_from_lengths
+from hw_3.utils.configs import fast_speech_second_config
+from hw_3.model.FastSpeechSecond.EncoderDecoder import Encoder, Decoder
+from hw_3.model.FastSpeechSecond.VarianceAdaptor import VarianceAdaptor
+from hw_3.model.FastSpeechSecond.utils import get_mask_from_lengths
 
 
 class FastSpeechSecond(nn.Module):

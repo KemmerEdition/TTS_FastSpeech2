@@ -1,7 +1,7 @@
 from tqdm import tqdm
-from hw_fs.datasets.ljspeech_dataset import process_text
-from hw_fs.text import text_to_sequence
-from hw_fs.utils.configs import pitch_energy_config
+from hw_3.datasets.ljspeech_dataset import process_text
+from hw_3.text import text_to_sequence
+from hw_3.utils.configs import pitch_energy_config
 import numpy as np
 import pyworld as pw
 import torchaudio

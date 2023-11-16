@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from hw_fs.tests.utils import clear_log_folder_after_use
-from hw_fs.utils.parse_config import ConfigParser
+from hw_3.tests.utils import clear_log_folder_after_use
+from hw_3.utils.parse_config import ConfigParser
 
 
 class TestConfig(unittest.TestCase):

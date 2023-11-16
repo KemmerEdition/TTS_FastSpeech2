@@ -1,9 +1,9 @@
 import torch
 from torch import nn
-from hw_fs.model.FastSpeechFirst.EncoderDecoder import Encoder, Decoder
-from hw_fs.model.FastSpeechFirst.blocks import LengthRegulator
-from hw_fs.model.FastSpeechFirst.utils import get_mask_from_lengths
-from hw_fs.utils.configs import fast_speech_config
+from hw_3.model.FastSpeechFirst.EncoderDecoder import Encoder, Decoder
+from hw_3.model.FastSpeechFirst.blocks import LengthRegulator
+from hw_3.model.FastSpeechFirst.utils import get_mask_from_lengths
+from hw_3.utils.configs import fast_speech_config
 
 
 class FastSpeech(nn.Module):

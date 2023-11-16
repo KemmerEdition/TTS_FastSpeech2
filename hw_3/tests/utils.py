@@ -3,7 +3,7 @@ import shutil
 from contextlib import contextmanager
 from time import sleep
 
-from hw_fs.utils.parse_config import ConfigParser
+from hw_3.utils.parse_config import ConfigParser
 
 
 @contextmanager

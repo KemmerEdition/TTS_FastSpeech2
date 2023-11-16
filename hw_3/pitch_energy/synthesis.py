@@ -4,10 +4,10 @@ import os
 
 import wandb
 
-from hw_fs.utils.configs import FastSpeechSecondConfig as train_config
-from hw_fs.text import text_to_sequence
-from hw_fs import waveglow
-from hw_fs.waveglow.inference import inference
+from hw_3.utils.configs import FastSpeechSecondConfig as train_config
+from hw_3.text import text_to_sequence
+from hw_3 import waveglow
+from hw_3.waveglow.inference import inference
 from tqdm import tqdm
 
 

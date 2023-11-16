@@ -2,8 +2,8 @@ import torch
 from torch import nn
 import numpy as np
 import torch.nn.functional as F
-from hw_fs.model.FastSpeechFirst.blocks import FFTBlock
-from hw_fs.model.FastSpeechFirst.utils import get_attn_key_pad_mask, get_non_pad_mask
+from hw_3.model.FastSpeechFirst.blocks import FFTBlock
+from hw_3.model.FastSpeechFirst.utils import get_attn_key_pad_mask, get_non_pad_mask
 
 
 class Encoder(nn.Module):

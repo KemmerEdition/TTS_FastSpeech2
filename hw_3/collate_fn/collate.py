@@ -1,6 +1,6 @@
 import logging
 import numpy as np
-from hw_fs.collate_fn.pad_data import reprocess_tensor
+from hw_3.collate_fn.pad_data import reprocess_tensor
 
 
 class Collate:

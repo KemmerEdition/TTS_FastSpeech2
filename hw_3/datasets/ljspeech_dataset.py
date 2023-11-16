@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import time
 from torch.utils.data import Dataset
-from hw_fs.text import text_to_sequence
+from hw_3.text import text_to_sequence
 from tqdm import tqdm
 
 # mini_config for fastspeech first

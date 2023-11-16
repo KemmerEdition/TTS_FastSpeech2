@@ -1,5 +1,5 @@
 from torch.utils.data import DataLoader
-from hw_fs.collate_fn import Collate
+from hw_3.collate_fn import Collate
 # from type of args torch.utils.data
 
 

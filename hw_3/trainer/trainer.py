@@ -3,20 +3,20 @@ import random
 import os
 import numpy as np
 import torchaudio
-from hw_fs import waveglow
+from hw_3 import waveglow
 import utils
 from torch import nn
 from torch.nn.utils import clip_grad_norm_
-from hw_fs.utils.configs import FastSpeechSecondConfig as train_config
-from hw_fs.pitch_energy.synthesis import log_audios
-from hw_fs.pitch_energy.synthesis import synthesis, get_data, get_WaveGlow
-from hw_fs.text import text_to_sequence
+from hw_3.utils.configs import FastSpeechSecondConfig as train_config
+from hw_3.pitch_energy.synthesis import log_audios
+from hw_3.pitch_energy.synthesis import synthesis, get_data, get_WaveGlow
+from hw_3.text import text_to_sequence
 from tqdm import tqdm
 import wandb
 
-from hw_fs.base import BaseTrainer
-from hw_fs.utils import inf_loop, MetricTracker
-from hw_fs.logger import WanDBWriter
+from hw_3.base import BaseTrainer
+from hw_3.utils import inf_loop, MetricTracker
+from hw_3.logger import WanDBWriter
 
 
 class Trainer(BaseTrainer):

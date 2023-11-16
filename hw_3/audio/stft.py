@@ -9,9 +9,9 @@ from scipy.signal import get_window
 from librosa.util import pad_center, tiny
 from librosa.filters import mel as librosa_mel_fn
 
-from hw_fs.audio.audio_processing import dynamic_range_compression
-from hw_fs.audio.audio_processing import dynamic_range_decompression
-from hw_fs.audio.audio_processing import window_sumsquare
+from hw_3.audio.audio_processing import dynamic_range_compression
+from hw_3.audio.audio_processing import dynamic_range_decompression
+from hw_3.audio.audio_processing import window_sumsquare
 
 
 class STFT(torch.nn.Module):
