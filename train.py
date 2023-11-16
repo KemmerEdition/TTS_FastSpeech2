@@ -5,14 +5,14 @@ import warnings
 import numpy as np
 import torch
 
-import hw_fs.loss as module_loss
-# import hw_fs.metric as module_metric
-import hw_fs.model as module_arch
-from hw_fs.trainer import Trainer
-from hw_fs.utils import prepare_device
-import hw_fs.datasets as dataset
-from hw_fs.utils.object_loading import LJLoader
-from hw_fs.utils.parse_config import ConfigParser
+import hw_3.loss as module_loss
+# import hw_3.metric as module_metric
+import hw_3.model as module_arch
+from hw_3.trainer import Trainer
+from hw_3.utils import prepare_device
+import hw_3.datasets as dataset
+from hw_3.utils.object_loading import LJLoader
+from hw_3.utils.parse_config import ConfigParser
 
 warnings.filterwarnings("ignore", category=UserWarning)
 

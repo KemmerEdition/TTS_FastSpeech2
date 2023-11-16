@@ -4,20 +4,20 @@ import os
 from pathlib import Path
 
 import torch
-import waveglow
+from hw_3 import waveglow
 import utils
 import numpy as np
-from hw_fs.text import text_to_sequence
-from hw_fs.text import sequence_to_text
-import audio
+from hw_3.text import text_to_sequence
+from hw_3.text import sequence_to_text
+from hw_3 import audio
 from tqdm import tqdm
 
-import hw_fs.model as module_model
-import hw_fs.datasets as dataset
-# from hw_fs.trainer import Trainer
-from hw_fs.utils import ROOT_PATH
-from hw_fs.utils.object_loading import LJLoader
-from hw_fs.utils.parse_config import ConfigParser
+import hw_3.model as module_model
+import hw_3.datasets as dataset
+# from hw_3.trainer import Trainer
+from hw_3.utils import ROOT_PATH
+from hw_3.utils.object_loading import LJLoader
+from hw_3.utils.parse_config import ConfigParser
 
 DEFAULT_CHECKPOINT_PATH = ROOT_PATH / "default_test_model" / "checkpoint.pth"
 
