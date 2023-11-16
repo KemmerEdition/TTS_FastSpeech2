@@ -1,2 +1,2 @@
-from hw_3 import waveglow.inference
-from hw_3 import waveglow.mel2samp
+from hw_3.waveglow import mel2samp
+from hw_3.waveglow import inference
