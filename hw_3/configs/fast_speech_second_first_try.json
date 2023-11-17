@@ -14,10 +14,11 @@
         },
   "dataloaders": {
     "type": "LJLoader",
-    "args":{
-    "batch_size": 48,
-    "batch_expand_size": 32,
+    "args": {
+      "batch_size": 48,
+      "batch_expand_size": 32,
       "num_workers": 0
+    }
   },
   "optimizer": {
     "type": "AdamW",
@@ -53,5 +54,5 @@
     "wandb_project": "fast_speech_project",
     "len_epoch": 396,
     "grad_norm_clip": 1.0
-  }}}
+  }}
 

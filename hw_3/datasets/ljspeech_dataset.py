@@ -6,6 +6,11 @@ from torch.utils.data import Dataset
 from hw_3.text import text_to_sequence
 from tqdm import tqdm
 
+from torch.utils.data import DataLoader
+from hw_3.collate_fn import Collate
+
+# from type of args torch.utils.data
+
 # mini_config for fastspeech first
 mel_ground_truth = "./mels"
 data_path = "./data/train.txt"
@@ -62,3 +67,11 @@ class BufferDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.buffer[idx]
+
+
+class LJLoader(DataLoader):
+    def __init__(self, datasets, batch_size, batch_expand_size, num_workers):
+        super().__init__(dataset=datasets, batch_size=batch_size * batch_expand_size,
+                         shuffle=True, collate_fn=Collate(batch_expand_size), drop_last=True, num_workers=num_workers)
+        self.batch_expand_size = batch_expand_size
+

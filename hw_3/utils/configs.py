@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import torch
 
 
-@ dataclass
+@dataclass
 class PitchEnergyConfig:
     data_path = "./data/train.txt"
     wav_path = './data/LJSpeech-1.1/wavs'
@@ -84,6 +84,7 @@ class FastSpeechSecondConfig:
     pitch_max = 861.0653
     energy_min = 0.0179
     energy_max = 314.9619
+    batch_expand_size = 32
 
     variance_predictor_filter_size: int = 256
     variance_predictor_kernel_size: int = 3

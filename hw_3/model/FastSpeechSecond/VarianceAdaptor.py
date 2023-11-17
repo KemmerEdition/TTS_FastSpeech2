@@ -7,7 +7,7 @@ from hw_3.model.FastSpeechSecond.utils import Transpose, create_alignment
 
 class VariancePredictor(nn.Module):
     def __init__(self, model_config):
-        super(VariancePredictor).__init__()
+        super(VariancePredictor, self).__init__()
 
         self.model_config = model_config
         self.input_size = model_config.encoder_dim

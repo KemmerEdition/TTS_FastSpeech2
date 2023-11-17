@@ -17,6 +17,7 @@ import wandb
 from hw_3.base import BaseTrainer
 from hw_3.utils import inf_loop, MetricTracker
 from hw_3.logger import WanDBWriter
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 class Trainer(BaseTrainer):

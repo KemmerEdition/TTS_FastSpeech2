@@ -29,7 +29,7 @@ def main(config):
 
     # setup data_loader instances
     datasets = config.init_obj(config["datasets"], dataset)
-    dataloaders = config.init_obj(config["dataloaders"], LJLoader, datasets=datasets)
+    dataloaders = config.init_obj(config["dataloaders"], dataset, datasets=datasets)
 
     # build model architecture, then print to console
     model = config.init_obj(config["arch"], module_arch)
