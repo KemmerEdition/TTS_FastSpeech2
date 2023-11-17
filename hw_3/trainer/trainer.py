@@ -3,13 +3,13 @@ import random
 import os
 import numpy as np
 import torchaudio
-from hw_3 import waveglow
+import waveglow
 import utils
 from torch import nn
 from torch.nn.utils import clip_grad_norm_
 from hw_3.utils.configs import FastSpeechSecondConfig as train_config
 from hw_3.pitch_energy.synthesis import log_audios
-from hw_3.pitch_energy.synthesis import synthesis, get_data, get_WaveGlow
+from hw_3.pitch_energy.synthesis import synthesis, get_data
 from hw_3.text import text_to_sequence
 from tqdm import tqdm
 import wandb
@@ -183,6 +183,8 @@ class Trainer(BaseTrainer):
         if isinstance(parameters, torch.Tensor):
             parameters = [parameters]
         parameters = [p for p in parameters if p.grad is not None]
+        if len(parameters) == 0:
+            return 0.0
         total_norm = torch.norm(
             torch.stack(
                 [torch.norm(p.grad.detach(), norm_type).cpu() for p in parameters]
