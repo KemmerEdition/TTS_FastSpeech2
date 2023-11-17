@@ -6,12 +6,12 @@ import wandb
 
 from hw_3.utils.configs import FastSpeechSecondConfig as train_config
 from hw_3.text import text_to_sequence
-from hw_3 import waveglow
+import hw_3.waveglow
 from hw_3.waveglow.inference import inference
 from tqdm import tqdm
 
 
-def synthesis(model, text, alpha=1.0, p_alpha=1.0, e_alpha=1.0):
+def synthesis(model, text, alpha=1.0, alpha_p=1.0, alpha_e=1.0):
     text = np.stack([text])
     src_pos = np.array([i + 1 for i in range(text.shape[1])])
     src_pos = np.stack([src_pos])
@@ -19,7 +19,7 @@ def synthesis(model, text, alpha=1.0, p_alpha=1.0, e_alpha=1.0):
     src_pos = torch.from_numpy(src_pos).long().to(train_config.device)
 
     with torch.no_grad():
-        mel = model.forward(sequence, src_pos, alpha=alpha, p_alpha=p_alpha, e_alpha=e_alpha)
+        mel = model.forward(sequence, src_pos, alpha=alpha, alpha_p=alpha_p, alpha_e=alpha_e)
     return mel[0].cpu().transpose(0, 1), mel.contiguous().transpose(1, 2)
 
 
@@ -34,7 +34,7 @@ def get_data():
 
 
 def get_WaveGlow():
-    waveglow_path = os.path.join("src/waveglow", "pretrained_model")
+    waveglow_path = os.path.join("waveglow", "pretrained_model")
     waveglow_path = os.path.join(waveglow_path, "waveglow_256channels.pt")
     wave_glow = torch.load(waveglow_path)['model']
     wave_glow = wave_glow.remove_weightnorm(wave_glow)
