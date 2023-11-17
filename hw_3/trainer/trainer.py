@@ -3,7 +3,7 @@ import random
 import os
 import numpy as np
 import torchaudio
-import waveglow
+from hw_3 import waveglow
 import utils
 from torch import nn
 from torch.nn.utils import clip_grad_norm_
