@@ -137,7 +137,7 @@ class Trainer(BaseTrainer):
                     self.train_metrics.reset()
                     # table = log_audios(model=self.model, WaveGlow=WaveGlow)
                     # logger.log()
-            if batch_idx >= self.len_epoch:
+            if batch_idx >= self.len_epoch + 2:
                 break
         log = last_train_metrics
         self.evaluation()

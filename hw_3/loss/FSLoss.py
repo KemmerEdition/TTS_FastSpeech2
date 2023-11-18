@@ -29,7 +29,7 @@ class FastSpeechSecondLoss(nn.Module):
 
         mel_loss = self.l1_loss(mel, mel_target)
         duration_predictor_loss = self.mse_loss(duration_prediction, torch.log1p(duration_predictor_target.float()))
-        pitch_loss = self.mse_loss(pitch_prediction, torch.log1p(pitch_target.float()))
+        pitch_loss = self.mse_loss(pitch_prediction, pitch_target.float())
         energy_loss = self.mse_loss(energy_prediction, torch.log1p(energy_target))
 
         return mel_loss, duration_predictor_loss, pitch_loss, energy_loss

@@ -15,8 +15,8 @@
   "dataloaders": {
     "type": "LJLoader",
     "args": {
-      "batch_size": 48,
-      "batch_expand_size": 32,
+      "batch_size": 66,
+      "batch_expand_size": 2,
       "num_workers": 0
     }
   },
@@ -36,7 +36,7 @@
   "lr_scheduler": {
     "type": "OneCycleLR",
     "args": {
-      "steps_per_epoch": 396,
+      "steps_per_epoch": 99,
       "epochs": 500,
       "anneal_strategy": "cos",
       "max_lr": 1e-3,

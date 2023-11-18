@@ -15,8 +15,8 @@
   "dataloaders": {
     "type": "LJLoader",
     "args": {
-      "batch_size": 48,
-      "batch_expand_size": 32,
+      "batch_size": 34,
+      "batch_expand_size": 8,
       "num_workers": 0
     }
   },
@@ -46,7 +46,7 @@
   "trainer": {
     "epochs": 600,
     "save_dir": "saved/",
-    "save_period": 20,
+    "save_period": 10,
     "verbosity": 2,
     "monitor": "min val_loss",
     "early_stop": 100,
