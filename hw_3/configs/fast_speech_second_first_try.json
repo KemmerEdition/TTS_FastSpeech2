@@ -15,8 +15,8 @@
   "dataloaders": {
     "type": "LJLoader",
     "args": {
-      "batch_size": 34,
-      "batch_expand_size": 8,
+      "batch_size": 48,
+      "batch_expand_size": 32,
       "num_workers": 0
     }
   },
@@ -36,7 +36,7 @@
   "lr_scheduler": {
     "type": "OneCycleLR",
     "args": {
-      "steps_per_epoch": 396,
+      "steps_per_epoch": 384,
       "epochs": 600,
       "anneal_strategy": "cos",
       "max_lr": 1e-3,
@@ -46,13 +46,13 @@
   "trainer": {
     "epochs": 600,
     "save_dir": "saved/",
-    "save_period": 10,
+    "save_period": 5,
     "verbosity": 2,
     "monitor": "min val_loss",
     "early_stop": 100,
     "visualize": "wandb",
     "wandb_project": "fast_speech_project",
-    "len_epoch": 396,
+    "len_epoch": 384,
     "grad_norm_clip": 1.0
   }}
 
