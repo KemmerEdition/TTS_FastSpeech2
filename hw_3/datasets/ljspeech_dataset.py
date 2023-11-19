@@ -59,7 +59,7 @@ def get_data_to_buffer():
 
 class BufferDataset(Dataset):
     def __init__(self):
-        self.buffer = list(np.load("/kaggle/working/pitch_energy_tensor.npy", allow_pickle=True))
+        self.buffer = list(np.load("/kaggle/working/pitch_energy_interpolation.npy", allow_pickle=True))
         self.length_dataset = len(self.buffer)
 
     def __len__(self):
