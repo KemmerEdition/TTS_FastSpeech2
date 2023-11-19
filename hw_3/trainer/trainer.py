@@ -69,10 +69,11 @@ class Trainer(BaseTrainer):
         :param epoch: Integer, current training epoch.
         :return: A log that contains average loss and metric in this epoch.
         """
-        batch_idx = 0
+        # batch_idx = 0
         self.model.train()
         self.train_metrics.reset()
         self.writer.add_scalar("epoch", epoch)
+        batch_idx = 0
         for batch in (
                 tqdm(self.train_dataloader)
         ):
@@ -137,7 +138,7 @@ class Trainer(BaseTrainer):
                     self.train_metrics.reset()
                     # table = log_audios(model=self.model, WaveGlow=WaveGlow)
                     # logger.log()
-            if batch_idx >= self.len_epoch + 4:
+            if batch_idx >= self.len_epoch:
                 break
         log = last_train_metrics
         self.evaluation()

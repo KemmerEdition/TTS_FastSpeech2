@@ -16,7 +16,7 @@
     "type": "LJLoader",
     "args": {
       "batch_size": 48,
-      "batch_expand_size": 32,
+      "batch_expand_size": 12,
       "num_workers": 0
     }
   },
@@ -36,7 +36,7 @@
   "lr_scheduler": {
     "type": "OneCycleLR",
     "args": {
-      "steps_per_epoch": 384,
+      "steps_per_epoch": 100,
       "epochs": 600,
       "anneal_strategy": "cos",
       "max_lr": 1e-3,
@@ -52,7 +52,6 @@
     "early_stop": 100,
     "visualize": "wandb",
     "wandb_project": "fast_speech_project",
-    "len_epoch": 384,
     "grad_norm_clip": 1.0
   }}
 
