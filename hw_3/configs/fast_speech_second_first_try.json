@@ -36,17 +36,17 @@
   "lr_scheduler": {
     "type": "OneCycleLR",
     "args": {
-      "steps_per_epoch": 100,
-      "epochs": 600,
+      "steps_per_epoch": 300,
+      "epochs": 626,
       "anneal_strategy": "cos",
       "max_lr": 1e-3,
       "pct_start": 0.1
     }
   },
   "trainer": {
-    "epochs": 600,
+    "epochs": 626,
     "save_dir": "saved/",
-    "save_period": 5,
+    "save_period": 25,
     "verbosity": 2,
     "monitor": "min val_loss",
     "early_stop": 100,
