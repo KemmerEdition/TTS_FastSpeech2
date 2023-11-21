@@ -84,7 +84,7 @@ class FastSpeechSecondConfig:
     pitch_max = 861.0653
     energy_min = 0.0179
     energy_max = 314.9619
-    batch_expand_size = 32
+    batch_expand_size = 12
 
     variance_predictor_filter_size: int = 256
     variance_predictor_kernel_size: int = 3

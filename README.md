@@ -1,82 +1,55 @@
-# ASR project barebones
+# Text-to-Speech (FastSpeech2) project
+
+ This is a repository for Text-to-Speech project based on one of DLA course (HSE).
+## Repository structure
+
+`hw_3` - directory included all project files.
+* `audio` - functions and classes for audio preprocessing based on NVIDIA.
+* `base` - base classes for model, dataset and train.
+* `collate_fn` - class preparing for dataloader.
+* `configs` - configs with params for training.
+* `datasets` - dataset class and text preprocessing functions with function for FastSpeechFirst.
+* `logger` - files for logging.
+* `loss` - definition for loss computation (both FastSpeechFirst and Second).
+* `model` - architectures for both FastSpeechFirst and Second.
+* `pitch_energy` - computation of pitch and energy and stats getting; functions for synthesis.
+* `trainer` - train loop, logging in W&B.
+* `utils` - configs (dataclasses) with hyperparams of models and other crucial functions (parse_config, object_loading, utils).
 
 ## Installation guide
 
-< Write your installation guide here >
+Let's dive into several preparation steps you need to deal with before training FastSpeechSecond:
+
+As usual, clone repository, change directory and install requirements:
 
 ```shell
+git clone https://github.com/KemmerEdition/HW-3-FS.git
+cd /content/HW-3-FS 
 pip install -r ./requirements.txt
 ```
+## Train
+You need to download data, get pitch and energy, count stats (all you need is run commands from `reproduce_train`) and then train model with command below.
 
-## Recommended implementation order
-
-You might be a little intimidated by the number of folders and classes. Try to follow this steps to gradually undestand
-the workflow.
-
-1) Test `hw_asr/tests/test_dataset.py`  and `hw_asr/tests/test_config.py` and make sure everythin works for you
-2) Implement missing functions to fix tests in  `hw_asr\tests\test_text_encoder.py`
-3) Implement missing functions to fix tests in  `hw_asr\tests\test_dataloader.py`
-4) Implement functions in `hw_asr\metric\utils.py`
-5) Implement missing function to run `train.py` with a baseline model
-6) Write your own model and try to overfit it on a single batch
-7) Implement ctc beam search and add metrics to calculate WER and CER over hypothesis obtained from beam search.
-8) ~~Pain and suffering~~ Implement your own models and train them. You've mastered this template when you can tune your
-   experimental setup just by tuning `configs.json` file and running `train.py`
-9) Don't forget to write a report about your work
-10) Get hired by Google the next day
-
-## Before submitting
-
-0) Make sure your projects run on a new machine after complemeting the installation guide or by 
-   running it in docker container.
-1) Search project for `# TODO: your code here` and implement missing functionality
-2) Make sure all tests work without errors
    ```shell
-   python -m unittest discover hw_fs/tests
+   python -m train \
+      -c hw_3/configs/fast_speech_second_first_try.json
    ```
-3) Make sure `test.py` works fine and works as expected. You should create files `default_test_config.json` and your
-   installation guide should download your model checpoint and configs in `default_test_model/checkpoint.pth`
-   and `default_test_model/config.json`.
+## Test
+You only need to download checkpoint of my model and wait some time.
    ```shell
-   python test.py \
-      -c default_test_config.json \
-      -r default_test_model/checkpoint.pth \
-      -t test_data \
-      -o test_result.json
+   !gdown --id 1xKnOlTafYDP9p7BG6a7TXNsIMFwU1dnL
+  ```
+   ```shell
+!python -m test \
+   -c config.json \
+   -r checkpoint-epoch350.pth 
    ```
-4) Use `train.py` for training
-
+Find directory named `results` and run following command, where you'll write path for audio you're interested in (see example):
+```shell
+from IPython import display
+display.Audio('/content/HW-3-FS/results/pitch_s=0.8_0_waveglow.wav')
+```
 ## Credits
 
 This repository is based on a heavily modified fork
 of [pytorch-template](https://github.com/victoresque/pytorch-template) repository.
-
-## Docker
-
-You can use this project with docker. Quick start:
-
-```bash 
-docker build -t my_hw_asr_image . 
-docker run \
-   --gpus '"device=0"' \
-   -it --rm \
-   -v /path/to/local/storage/dir:/repos/asr_project_template/data/datasets \
-   -e WANDB_API_KEY=<your_wandb_api_key> \
-	my_hw_asr_image python -m unittest 
-```
-
-Notes:
-
-* `-v /out/of/container/path:/inside/container/path` -- bind mount a path, so you wouldn't have to download datasets at
-  the start of every docker run.
-* `-e WANDB_API_KEY=<your_wandb_api_key>` -- set envvar for wandb (if you want to use it). You can find your API key
-  here: https://wandb.ai/authorize
-
-## TODO
-
-These barebones can use more tests. We highly encourage students to create pull requests to add more tests / new
-functionality. Current demands:
-
-* Tests for beam search
-* README section to describe folders
-* Notebook to show how to work with `ConfigParser` and `config_parser.init_obj(...)`

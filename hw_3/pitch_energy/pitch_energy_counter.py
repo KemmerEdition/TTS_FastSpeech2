@@ -37,11 +37,11 @@ def pitch_energy_counter(config=pitch_energy_config):
         pitch, t = pw.dio(wav_tensor.numpy(), config.sampling_rate,
                           frame_period=config.hop_length / config.sampling_rate * 1000)
         pitch = pw.stonemask(wav_tensor.numpy(), pitch, t, config.sampling_rate)
-        # try without additional elements from article
+        # without additional elements from article
         # pitch = pitch[: sum(duration)]
         # if np.sum(pitch != 0) <= 1:
         #     return None
-        # with interpolation
+        # with linear interpolation
         zero_res, non_zero_res = (pitch == 0), (pitch != 0)
         pitch[zero_res] = np.interp(np.argwhere(zero_res).squeeze(), np.argwhere(non_zero_res).squeeze(),
                                     pitch[non_zero_res])
@@ -74,6 +74,28 @@ def pitch_energy_counter(config=pitch_energy_config):
 
     end = time.perf_counter()
     # saving results of count process
-    np.save("pitch_energy_tensor.npy", buffer)
+    np.save("pitch_energy_interpolation.npy", buffer)
     print("cost {:.2f}s to load all data into buffer.".format(end - start))
     return buffer
+
+# you should count stats after saving pitch, energy
+# pitch_energy = np.load("pitch_energy_interpolation.npy", allow_pickle=True)
+# pitch = []
+# pitch_min = []
+# pitch_max = []
+# energy_min = []
+# energy_max = []
+#
+# for i in range(len(pitch_energy)):
+#   pitch.append(pitch_energy[i]['pitch'])
+#   pitch_min.append(min(list(pitch_energy[i]['pitch'])))
+#   pitch_max.append(max(list(pitch_energy[i]['pitch'])))
+#   energy_min.append(min(list(pitch_energy[i]['energy'])))
+#   energy_max.append(max(list(pitch_energy[i]['energy'])))
+#
+# pitch_min = min(pitch_min)
+# pitch_max = max(pitch_max)
+# energy_min = min(energy_min)
+# energy_max = max(energy_max)
+#
+# print(pitch_min, pitch_max, energy_min, energy_max)
