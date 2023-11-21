@@ -74,7 +74,7 @@ def reprocess_tensor(batch, cut_list):
     texts = [batch[ind]["text"] for ind in cut_list]
     mel_targets = [batch[ind]["mel_target"] for ind in cut_list]
     durations = [batch[ind]["duration"] for ind in cut_list]
-    #add pitchs and energy
+    # add pitchs and energy
     pitchs = [batch[ind]["pitch"] for ind in cut_list]
     energy = [batch[ind]["energy"] for ind in cut_list]
 

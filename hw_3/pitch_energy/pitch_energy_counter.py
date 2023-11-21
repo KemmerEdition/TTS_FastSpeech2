@@ -38,13 +38,13 @@ def pitch_energy_counter(config=pitch_energy_config):
                           frame_period=config.hop_length / config.sampling_rate * 1000)
         pitch = pw.stonemask(wav_tensor.numpy(), pitch, t, config.sampling_rate)
         # try without additional elements from article
-        pitch = pitch[: sum(duration)]
-        if np.sum(pitch != 0) <= 1:
-            return None
+        # pitch = pitch[: sum(duration)]
+        # if np.sum(pitch != 0) <= 1:
+        #     return None
         # with interpolation
-        # zero_res, non_zero_res = (pitch == 0), (pitch != 0)
-        # pitch[zero_res] = np.interp(np.argwhere(zero_res).squeeze(), np.argwhere(non_zero_res).squeeze(),
-        #                             pitch[non_zero_res])
+        zero_res, non_zero_res = (pitch == 0), (pitch != 0)
+        pitch[zero_res] = np.interp(np.argwhere(zero_res).squeeze(), np.argwhere(non_zero_res).squeeze(),
+                                    pitch[non_zero_res])
         pitch = torch.tensor(pitch)
 
         # get energy

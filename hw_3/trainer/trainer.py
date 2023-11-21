@@ -69,7 +69,6 @@ class Trainer(BaseTrainer):
         :param epoch: Integer, current training epoch.
         :return: A log that contains average loss and metric in this epoch.
         """
-        # batch_idx = 0
         self.model.train()
         self.train_metrics.reset()
         self.writer.add_scalar("epoch", epoch)
@@ -136,8 +135,6 @@ class Trainer(BaseTrainer):
                     self._log_scalars(self.train_metrics)
                     last_train_metrics = self.train_metrics.result()
                     self.train_metrics.reset()
-                    # table = log_audios(model=self.model, WaveGlow=WaveGlow)
-                    # logger.log()
             if batch_idx >= self.len_epoch:
                 break
         log = last_train_metrics
@@ -200,5 +197,5 @@ class Trainer(BaseTrainer):
         for metric_name in metric_tracker.keys():
             self.writer.add_scalar(f"{metric_name}", metric_tracker.avg(metric_name))
 
-    def _log_audio(self, name, audio, sr):
-        self.writer.add_audio(f"audio{name}", audio, sample_rate=sr)
+    # def _log_audio(self, name, audio, sr):
+    #     self.writer.add_audio(f"audio{name}", audio, sample_rate=sr)

@@ -47,7 +47,6 @@ def get_WaveGlow():
 
 
 def log_audios(model, WaveGlow):
-    # model.eval()
     data_list, tests = get_data()
     table_labels = ["audio_waveglow", "duration", "pitch", "energy", "text"]
     container = []
@@ -62,5 +61,4 @@ def log_audios(model, WaveGlow):
                     container.append([wandb.Audio(path), speed, pitch, energy, tests[i]])
 
     table = wandb.Table(data=container, columns=table_labels)
-    # model.train()
     return table

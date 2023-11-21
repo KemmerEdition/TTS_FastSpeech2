@@ -14,12 +14,11 @@ from tqdm import tqdm
 
 import hw_3.model as module_model
 import hw_3.datasets as dataset
-# from hw_3.trainer import Trainer
 from hw_3.utils import ROOT_PATH
 from hw_3.utils.object_loading import LJLoader
 from hw_3.utils.parse_config import ConfigParser
 
-DEFAULT_CHECKPOINT_PATH = ROOT_PATH / "default_test_model" / "checkpoint.pth"
+DEFAULT_CHECKPOINT_PATH = ROOT_PATH / "checkpoint.pth"
 
 
 def main(config, out_file):
@@ -27,10 +26,6 @@ def main(config, out_file):
 
     # define cpu or gpu if possible
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    # setup data_loader instances
-    # datasets = config.init_obj(config["datasets"], dataset)
-    # dataloaders = config.init_obj(config["dataloaders"], LJLoader, datasets=datasets)
 
     # build model architecture
     model = config.init_obj(config["arch"], module_model)
@@ -51,7 +46,7 @@ def main(config, out_file):
     WaveGlow = utils.get_WaveGlow()
     WaveGlow = WaveGlow.to(device)
 
-    def synthesis(model, text, alpha=1.0):
+    def synthesis(model, text, alpha=1.0, alpha_p=1.0, alpha_e=1.0):
         text = np.array(text)
         text = np.stack([text])
         src_pos = np.array([i + 1 for i in range(text.shape[1])])
@@ -60,37 +55,43 @@ def main(config, out_file):
         src_pos = torch.from_numpy(src_pos).long().to(device)
 
         with torch.no_grad():
-            mel = model.forward(sequence, src_pos, alpha=alpha)
+            mel = model.forward(sequence, src_pos, alpha=alpha, alpha_p=alpha_p, alpha_e=alpha_e)
         return mel[0].cpu().transpose(0, 1), mel.contiguous().transpose(1, 2)
 
     def get_data():
         tests = [
-            "I am very happy to see you again!",
-            "Durian model is a very good speech synthesis!",
-            "When I was twenty, I fell in love with a girl.",
-            "I remove attention module in decoder and use average pooling to implement predicting r frames at once",
-            "You can not improve your past, but you can improve your future. Once time is wasted, life is wasted.",
-            "Death comes to all, but great achievements raise a monument which shall endure until the sun grows old."
+            "A defibrillator is a device that gives a high energy electric shock to the heart of someone who is in cardiac arrest",
+            "Massachusetts Institute of Technology may be best known for its math, science and engineering education",
+            "Wasserstein distance or Kantorovich Rubinstein metric is a distance function defined between probability distributions on a given metric space",
         ]
         data_list = list(text_to_sequence(test, ["english_cleaners"]) for test in tests)
 
         return data_list
 
     data_list = get_data()
-
+    os.makedirs("results", exist_ok=True)
     for speed in [0.8, 1., 1.3]:
         for i, phn in tqdm(enumerate(data_list)):
-            mel, mel_cuda = synthesis(model, phn, speed)
-
-            os.makedirs("results", exist_ok=True)
-
-            audio.tools.inv_mel_spec(
-                mel, f"results/s={speed}_{i}.wav"
-            )
+            mel, mel_cuda = synthesis(model, phn, alpha=speed)
 
             waveglow.inference.inference(
+                mel_cuda, WaveGlow, f"results/base_s={speed}_{i}_waveglow.wav"
+            )
+
+            mel, mel_cuda = synthesis(model, phn, alpha_p=speed)
+            waveglow.inference.inference(
+                mel_cuda, WaveGlow, f"results/pitch_s={speed}_{i}_waveglow.wav"
+            )
+
+            mel, mel_cuda = synthesis(model, phn, alpha_e=speed)
+            waveglow.inference.inference(
+                mel_cuda, WaveGlow, f"results/energy_s={speed}_{i}_waveglow.wav"
+            )
+
+            mel, mel_cuda = synthesis(model, phn, alpha=speed, alpha_p=speed, alpha_e=speed)
+            waveglow.inference.inference(
                 mel_cuda, WaveGlow,
-                f"results/s={speed}_{i}_waveglow.wav"
+                f"results/sum_s={speed}_{i}_waveglow.wav"
             )
 
 
@@ -162,31 +163,5 @@ if __name__ == "__main__":
     if args.config is not None:
         with Path(args.config).open() as f:
             config.config.update(json.load(f))
-
-    # # if `--test-data-folder` was provided, set it as a default test set
-    # if args.test_data_folder is not None:
-    #     test_data_folder = Path(args.test_data_folder).absolute().resolve()
-    #     assert test_data_folder.exists()
-    #     config.config["data"] = {
-    #         "test": {
-    #             "batch_size": args.batch_size,
-    #             "num_workers": args.jobs,
-    #             "datasets": [
-    #                 {
-    #                     "type": "CustomDirAudioDataset",
-    #                     "args": {
-    #                         "audio_dir": str(test_data_folder / "audio"),
-    #                         "transcription_dir": str(
-    #                             test_data_folder / "transcriptions"
-    #                         ),
-    #                     },
-    #                 }
-    #             ],
-    #         }
-    #     }
-    #
-    # assert config.config.get("data", {}).get("test", None) is not None
-    # config["data"]["test"]["batch_size"] = args.batch_size
-    # config["data"]["test"]["n_jobs"] = args.jobs
 
     main(config, args.output)
