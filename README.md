@@ -23,15 +23,21 @@ Let's dive into several preparation steps you need to deal with before training 
 As usual, clone repository, change directory and install requirements:
 
 ```shell
-git clone https://github.com/KemmerEdition/HW-3-FS.git
-cd /content/HW-3-FS 
-pip install -r ./requirements.txt
+!git clone https://github.com/KemmerEdition/HW-3-FS.git
+!cd /content/HW-3-FS 
+!pip install -r ./requirements.txt
 ```
 ## Train
-You need to download data, get pitch and energy, count stats (all you need is run commands from `reproduce_train`) and then train model with command below.
+You need to download data (all you need is run commands from `reproduce_train`), get pitch and energy.
 
+Download pitch and energy files and unzip them.
+```shell
+!gdown --id 1Vx30j-pWYb2TxfU0UnqWIbREPeh_G9eb
+!unzip pitch_energy_interpolation.npy.zip
+```
+Then train model with command below.
    ```shell
-   python -m train \
+   !python -m train \
       -c hw_3/configs/fast_speech_second_first_try.json
    ```
 ## Test
