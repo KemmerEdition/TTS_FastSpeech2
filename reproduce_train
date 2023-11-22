@@ -24,3 +24,7 @@ mv FastSpeech/waveglow/* waveglow/
 mv FastSpeech/hparams.py .
 mv FastSpeech/utils.py .
 mv FastSpeech/glow.py .
+
+# Again you need to move Waveglow to the desired directory (make sure you've done it - it was annoying bug)
+mkdir -p waveglow/pretrained_model/
+mv waveglow_256channels_ljs_v2.pt waveglow/pretrained_model/waveglow_256channels.pt

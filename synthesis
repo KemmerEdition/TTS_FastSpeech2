@@ -1,0 +1,17 @@
+# After cloning repository and installing requirements, uploading checkpoint you need to figure out Waveglow and clone another repository
+# Download Waveglow
+gdown https://drive.google.com/u/0/uc?id=1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx
+mkdir -p waveglow/pretrained_model/
+mv waveglow_256channels_ljs_v2.pt waveglow/pretrained_model/waveglow_256channels.pt
+
+# Clone the necessary repository
+git clone https://github.com/xcmyz/FastSpeech.git
+mv FastSpeech/text .
+mv FastSpeech/audio .
+mv FastSpeech/waveglow/* waveglow/
+mv FastSpeech/hparams.py .
+mv FastSpeech/utils.py .
+mv FastSpeech/glow.py .
+
+# Please, make sure that you've accurately moved Waveglow pretrained to the directory
+# Then enjoy synthesis

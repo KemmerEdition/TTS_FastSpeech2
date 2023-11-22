@@ -6,7 +6,7 @@
 `hw_3` - directory included all project files.
 * `audio` - functions and classes for audio preprocessing based on NVIDIA.
 * `base` - base classes for model, dataset and train.
-* `collate_fn` - class preparing for dataloader.
+* `collate_fn` - class preparing for dataloader and utils for padding.
 * `configs` - configs with params for training.
 * `datasets` - dataset class and text preprocessing functions with function for FastSpeechFirst.
 * `logger` - files for logging.
@@ -14,7 +14,7 @@
 * `model` - architectures for both FastSpeechFirst and Second.
 * `pitch_energy` - computation of pitch and energy and stats getting; functions for synthesis.
 * `trainer` - train loop, logging in W&B.
-* `utils` - configs (dataclasses) with hyperparams of models and other crucial functions (parse_config, object_loading, utils).
+* `utils` - configs (dataclasses) with hyperparams of models (and for pitch&energy preparation) and other crucial functions (parse_config, object_loading, utils).
 
 ## Installation guide
 
@@ -35,7 +35,7 @@ You need to download data, get pitch and energy, count stats (all you need is ru
       -c hw_3/configs/fast_speech_second_first_try.json
    ```
 ## Test
-You only need to download checkpoint of my model and wait some time.
+You only need to run commands from `synthesis` and download checkpoint of my model, wait some time and enjoy.
    ```shell
    !gdown --id 1xKnOlTafYDP9p7BG6a7TXNsIMFwU1dnL
   ```

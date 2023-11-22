@@ -120,7 +120,6 @@ class VarianceAdaptor(nn.Module):
         x, duration_predictor = self.length_regulator(x, alpha_d, dur_target, max_len)
 
         pitch_predictor = self.pitch_predictor(x)
-        # energy_predictor = self.energy_predictor(x)
 
         if pitch_target is not None and energy_target is not None:
             pitch_value = self.pitch_emb(torch.bucketize(pitch_target, self.pitch_bucket))
