@@ -6,6 +6,7 @@
 `hw_3` - directory included all project files.
 * `audio` - functions and classes for audio preprocessing based on NVIDIA.
 * `base` - base classes for model, dataset and train.
+* `best_results` - best audios during train process
 * `collate_fn` - class preparing for dataloader and utils for padding.
 * `configs` - configs with params for training.
 * `datasets` - dataset class and text preprocessing functions with function for FastSpeechFirst.
@@ -13,6 +14,7 @@
 * `loss` - definition for loss computation (both FastSpeechFirst and Second).
 * `model` - architectures for both FastSpeechFirst and Second.
 * `pitch_energy` - computation of pitch and energy and stats getting; functions for synthesis.
+* `results_after_train` - this folder contains 81 examples of audio files with various configurations
 * `trainer` - train loop, logging in W&B.
 * `utils` - configs (dataclasses) with hyperparams of models (and for pitch&energy preparation) and other crucial functions (parse_config, object_loading, utils).
 
